@@ -1,0 +1,11 @@
+bug 1: despite initializing and filling a buffer for the status bar, and calling the show statusbar in mazegame, the status bar wouldn't show up properly. It would flash constantly
+fix 1: after re-reading the documentation, i recalled ps2 and realized i wasn't saving the crtc registers and target_img corretly. I filled them with the correct values and the status bar worked gloriously.
+
+bug 2: the player sprite was flashing between the sprite and the map (like the player was invisible)
+fix 2: i realized i wasn't keeping track of the previous x and y positions for the blocks properly, so I added temp_x and temp_y and the masking was fixed.
+
+bug 3: the black trail was not being masked
+fix 3: i wasn't calling draw_mask and draw_full_block with every show_screen like i should have been. Once sandwiching each show_screen with those functions, the game would then fill the buffer every time and no black trail was left.
+
+bug 4: text to image formula was not printing the characters correctly at all, the characters looked like scattered pixels. 
+fix 4: i changed the layer within the nested for loops that the variables mask, and index were set at, and then the status bar displayed the characters correctly.
